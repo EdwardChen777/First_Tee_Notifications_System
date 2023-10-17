@@ -37,38 +37,9 @@ function ClassList() {
       console.log(id);
       dataFetch(id);
     }
-    // const idFetch = async () => {
-    //   const data = await JSON.parse(localStorage.getItem('userId'));
-    //   setUserId(data);
-    // }
 
-    
-    
-    // const emailArray = userEmail.split("@");
-    // const emailPrefix = emailArray[0];
-    // console.log(emailPrefix);
-
-    // // encode user email within the get request 
-    // console.log(`http://localhost:3000/sessions?session=${encodeURIComponent(emailPrefix)}`);
-    // fetch(`/sessions?session=${encodeURIComponent(emailPrefix)}`)
-    //   .then((res) => res.json())
-    //   .then((data) => setSession(data));
-    // fetch(`/sessions?session=${encodeURIComponent(JSON.parse(localStorage.getItem('userId')))}`)
-    //   .then((res) => res.json())
-    //   .then((data) => setSession(data));
   }, []);
 
-  // useEffect(() => {
-  //   /* global google */
-  //   console.log("userId changed");
-  //   console.log(userId);
-  //   if (userId) {
-  //     fetch(`/sessions?session=${encodeURIComponent(userId)}`)
-  //       .then((res) => res.json())
-  //       .then((data) => setSession(data));
-  //   }
-    
-  // }, [userId]);
 
   useEffect(() => {
     /* global google */
@@ -92,8 +63,6 @@ function ClassList() {
   }
 
   function getParticipants(sessionId, sessionName) {
-    // navigate("/message", {state:{userEmail: userEmail, sessionId: sessionId, sessionName: sessionName}});
-    // navigate("/message", {state:{sessionId: sessionId, sessionName: sessionName}});
     localStorage.setItem('sessionId', JSON.stringify(sessionId));
     localStorage.setItem('sessionName', JSON.stringify(sessionName));
     setTest("hi");

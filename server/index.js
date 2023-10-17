@@ -28,22 +28,6 @@ app.post("/coachId",(req,res) => {
     // retrieve coach's email from the request query parameters 
     let coachEmail = req.body.email;
     // get coach id from email 
-
-    // add your email to the if statement below and alter your log in email to another coach's email
-    if (coachEmail == "edithtan777@gmail.com" || coachEmail == "nmaher@andrew.cmu.edu" || coachEmail == "alexanderma00@gmail.com"){
-        coachEmail = 'pcoultas@thefirstteepittsburgh.org';
-        // coachEmail = 'lrussell@firstteepittsburgh.org';
-        // coachEmail = 'jroberts@thefirstteepittsburgh.org';
-        // coachEmail = 'brettbossblackwood@gmail.com';
-        // coachEmail = 'rhawkins@firstteepittsburgh.org';
-        // coachEmail = 'alindauer@firstteepittsburgh.org';
-        // 
-    }
-    tempEmail = 'pcoultas@firstteepittsburgh.org';
-    // const coachId = '0033600001KJ05SAAT'
-    // get coach sessions from id 
-    console.log("second time through");
-    console.log(coachEmail);
     salesforce.getCoachId(coachEmail,res);
     // res.json(sessions);
 });
@@ -52,29 +36,20 @@ app.post("/coachId",(req,res) => {
 app.get("/sessions",(req,res) => {
     // retrieve coach's email from the request query parameters 
     const coachEmail = req.query.session;
-    // console.log(coachEmail);
-    console.log("this should be the coach id");
-    // get coach id from email 
-    // const coachId = '0033600001KJ05SAAT'
-    // get coach sessions from id 
+    // get coach sessions from email
     salesforce.coachSessions(coachEmail,res);
-    // res.json(sessions);
 });
 
 // get all the participants for a session 
 app.get("/participants",(req,res) => {
     const sessionId = req.query.participant;
-    // const sessionId = 'a0H1R000013eaoxUAA';
     salesforce.sessionParticipants(sessionId,res);
-    // res.json({ message: "Hello from server!" });
 });
 
 app.get("/coaches",(req,res) => {
     const sessionId = req.query.session;
-    // const sessionId = 'a0H1R000013eaoxUAA';
     console.log("retrieving coaches");
     salesforce.sessionCoaches(sessionId,res);
-    // res.json({ message: "Hello from server!" });
 });
 
 // send the message after receiving list of phone numbers and emails 
@@ -85,16 +60,13 @@ app.post("/sendmessage", (req,res) => {
     const msg = body.message;
     const coachId = body.coachId;
 
-    // const coachId = '0033600001KJ05SAAT'
 
     // send message to participants
     salesforce.sessionNumbers(coachId, twilio.sendMessage, msg);
-    // salesforce.sessionEmails(coachId, sendgrid.sendEmail, msg, subject)
     salesforce.sessionEmails(coachId, nodemailer.sendEmail, msg, subject)
 
     // send message to coaches
     salesforce.coachNumbers(coachId, twilio.sendMessage, msg);
-    // salesforce.coachEmails(coachId, sendgrid.sendEmail, msg, subject)
     salesforce.coachEmails(coachId, nodemailer.sendEmail, msg, subject)
 
     // res.json({ message: "Message Successfully Sent" });

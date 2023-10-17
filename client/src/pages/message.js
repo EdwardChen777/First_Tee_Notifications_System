@@ -15,16 +15,6 @@ function Message() {
     const navigate = useNavigate();
 
     const {state} = useLocation();
-    // const { name } = state; // Read values passed on state
-
-    // const { userEmail, sessionId, sessionName} = state;
-    // if (state !== null) {
-    //     const {sessionId, sessionName} = state;
-    // } else {
-    //     const prevId, prevName = usePrevious(sessionId, sessionName);
-    // }
-
-    // function usePrevious(id, name)
     
     const [userEmail, setUserEmail] = useState([]);
     const [sessionId, setSessionId] = useState([]);
@@ -88,10 +78,6 @@ function Message() {
         if (userid) {
             setUserId(userid);
         }
-
-        // fetch(`/coaches?session=${encodeURIComponent("a0H1R00001F6809UAB")}`)
-        //       .then((res) => res.json())
-        //       .then((data) => setCoach(data))
         
       }, []);
 
